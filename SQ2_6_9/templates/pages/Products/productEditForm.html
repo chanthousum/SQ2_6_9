@@ -1,0 +1,131 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+
+    <section class="content">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><a href="">{{ title }}</a></h3>
+                    </div><!-- /.box-header -->
+
+                    <!-- form start -->
+                    <div style="margin:10px;">
+                        <form action="/api/product/update/{{ products.id }}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-ms-12">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-form-label">Name :</label>
+                                        <div class="col-sm-3">
+                                            <input type="text" name="txtName" value="{{ products.productName }}"
+                                                   class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-ms-12">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-form-label">Barcode :</label>
+                                        <div class="col-sm-3">
+                                            <input type="text" name="txtBarcode" value="{{ products.barcode }}"
+                                                   class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-ms-12">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-form-label">Unit Price :</label>
+                                        <div class="col-sm-3">
+                                            <input type="text" name="txtUnitPrice" value="{{ products.unitPrice }}"
+                                                   class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-ms-12">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-form-label">Sell Price :</label>
+                                        <div class="col-sm-3">
+                                            <input type="text" name="txtSellPrice" value="{{ products.sellPrice }}"
+                                                   class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-ms-12">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-form-label">Qty :</label>
+                                        <div class="col-sm-3">
+                                            <input type="text" name="txtQty" value="{{ products.qty }}"
+                                                   class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-ms-12">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-form-label">Photo :</label>
+                                        <div class="col-sm-3">
+                                            <input type="file" name="photo" class="form-control">
+                                        </div>
+                                        {% if products.photo %}
+                                            <img src="/media/{{ products.photo }}" width="50">
+                                        {% else %}
+                                            <p>no image</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-ms-12">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-form-label">Category ID :</label>
+                                        <div class="col-sm-3">
+                                            <select class="form-control" name="dllCategoryId">
+                                                {% for category in  categorys %}
+                                                    {% if products.category_id == category.id %}
+                                                        <option value="{{category.id }}" selected>{{ category.categoryName }}</option>
+                                                    {% endif %}
+                                                    <option value="{{ category.id }}">{{ category.categoryName }}</option>
+                                                {% endfor %}
+
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="submit" value="Update" name="btn_name" class="btn btn-primary">
+                                        <a href="/api/product/index" class="btn btn-dark">Back</a>
+                                        {% include "pages/message.html" %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+
+                </div><!-- /.box -->
+
+            </div><!--/.col (left) -->
+            <!-- right column -->
+
+        </div>   <!-- /.row -->
+    </section>
+{% endblock %}
+

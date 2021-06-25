@@ -1,0 +1,62 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+    <section class="content">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><a href="/api/product/create">Add Product</a></h3>
+                    </div><!-- /.box-header -->
+
+                    <!-- form start -->
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Photo</th>
+                                <th style="text-align: center">Ation</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            {% for product in products %}
+                                <tr style="text-align: center">
+                                    <td>{{ product.id }}</td>
+                                    <td>{{ product.productName }}</td>
+                                    <td>
+                                        {% if product.photo %}
+                                            <img src="/media/{{ product.photo }}" width="50">
+                                        {% else %}
+                                            <p>no image</p>
+                                        {% endif %}
+
+                                    </td>
+                                    <td>
+                                        <a href="/api/product/edit/{{ product.id }}" class="btn btn-primary">Edit</a>
+                                        <a href="/api/product/destroy/{{ product.id }}"
+                                           class="btn btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+
+                            {% endfor %}
+
+                            </tbody>
+
+                        </table>
+                    </div>
+
+
+                </div><!-- /.box -->
+
+            </div><!--/.col (left) -->
+            <!-- right column -->
+
+        </div>   <!-- /.row -->
+    </section>
+{% endblock %}
